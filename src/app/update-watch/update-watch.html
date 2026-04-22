@@ -1,0 +1,94 @@
+<div class="container">
+  <div>
+    <h2>Modifier une Montre :</h2>
+  </div>
+
+<form #updateForm="ngForm">
+
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <label>ID Montre</label>
+    <input readonly type="text"
+           [(ngModel)]="currentWatch.idWatch"
+           name="idWatch"
+           class="form-control">
+  </div>
+
+ 
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <label>Nom Montre</label>
+    <input type="text"
+           [(ngModel)]="currentWatch.nomWatch"
+           name="nomWatch"
+           class="form-control"
+           required minlength="3"
+           #nomModifCtrl="ngModel">
+
+    <div class="text-danger" *ngIf="nomModifCtrl.invalid && nomModifCtrl.touched">
+      Le nom doit comporter au moins 3 caractères.
+    </div>
+  </div>
+
+ 
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <label>Prix</label>
+    <input type="number"
+           [(ngModel)]="currentWatch.prixWatch"
+           name="prixWatch"
+           class="form-control"
+           required min="1"
+           #caModifCtrl="ngModel">
+
+    <div class="text-danger" *ngIf="caModifCtrl.invalid && caModifCtrl.touched">
+      Le chiffre d’affaires doit être supérieur à 0.
+    </div>
+  </div>
+
+
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <label>Date Création</label>
+    <input type="date"
+           [ngModel]="currentWatch.dateCreation | date:'yyyy-MM-dd'"
+           (ngModelChange)="currentWatch.dateCreation = $event"
+           name="dateCreation"
+           class="form-control"
+           required
+           #dateModifCtrl="ngModel">
+
+    <div class="text-danger" *ngIf="dateModifCtrl.invalid && dateModifCtrl.touched">
+      La date est obligatoire.
+    </div>
+  </div>
+
+
+
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <label>Modèle</label>
+    <select class="form-control form-control-lg"
+            [(ngModel)]="updatedModId"
+            name="idMod"
+            required
+            #modModifCtrl="ngModel">
+
+      <option value="">-- Choisir un modèle --</option>
+      <option *ngFor="let mod of modeles" [value]="mod.idModel">
+        {{ mod.nomModel }}
+      </option>
+    </select>
+
+    <div class="text-danger" *ngIf="modModifCtrl.invalid && modModifCtrl.touched">
+      Veuillez choisir un modèle.
+    </div>
+  </div>
+
+
+  <div class="mt-2">
+    <button type="button"
+            class="btn btn-success"
+            (click)="updateWatch()"
+            [disabled]="updateForm.invalid">
+      Modifier
+    </button>
+  </div>
+
+</form>
+</div>

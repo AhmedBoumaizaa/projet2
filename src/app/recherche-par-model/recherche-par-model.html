@@ -1,0 +1,59 @@
+<h1 style="text-align: center;">Recherche de montres par modèle</h1>
+
+<div class="container">
+
+  <div class="form-group mt-3 mb-3">
+    <label>Sélectionnez un modèle :</label>
+    <select id="idModel" name="idModel" class="form-control" [(ngModel)]="idModel" (change)="onChange()">
+      <option value="">-- Choisissez un modèle --</option>
+      @for (m of modeles; track m.idModel) {
+        <option [value]="m.idModel">{{ m.nomModel }}</option>
+      }
+    </select>
+  </div>
+
+
+  <div *ngIf="idModel && watches.length > 0; else aucunResultat">
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Modèle</th>
+          <th>Prix</th>
+          <th>Date de Création</th>
+          @if(authService.isAdmin()) {
+          <th>Actions</th>
+          }
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (e of watches; track e.idWatch) {
+        <tr>
+          <td>{{ e.idWatch }}</td>
+          <td>{{ e.nomWatch }}</td>
+          <td>{{ e.nomModel || 'PAS DE MODELE' }}</td>
+          <td>{{ e.prixWatch | number }}</td>
+          <td>{{ e.dateCreation | date:'yyyy-MM-dd' }}</td>
+          @if(authService.isAdmin()) {
+          <td>
+            <button class="btn btn-success btn-sm me-2" (click)="modifierWatch(e)">
+              Modifier
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="supprimerWatch(e)">
+              Supprimer
+            </button>
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+
+  <ng-template #aucunResultat>
+    <p *ngIf="idModel">Aucune montre trouvée pour ce modèle.</p>
+  </ng-template>
+</div>

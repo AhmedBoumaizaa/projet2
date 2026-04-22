@@ -1,0 +1,28 @@
+<div class="container">
+<app-update-model [modele]="updatedMod"
+                    (modeleUpdated)="modeleUpdated($event)"
+                    [ajout]="ajout">
+</app-update-model>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id Modèle</th>
+            <th>Nom Modèle</th>
+          </tr>
+        </thead>
+
+        @for(mod of modeles; track mod.idModel) {
+        <tbody>
+          <tr>
+            <td>{{mod.idModel}}</td>
+            <td>{{mod.nomModel}}</td>
+            <td><a class="btn btn-success" (click)="updateMod(mod)">Editer</a></td>
+          </tr>
+        </tbody>
+        }
+      </table>
+    </div>
+  </div>
+</div>
