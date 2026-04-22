@@ -1,3 +1,3 @@
-# projet2_montres
-backend => https://github.com/Pardox33/projet2_montres_springboot <br>
-backend(MicroService) => https://github.com/Pardox33/projet2_montres_springboot_MicroService
+# projet2_montres 
+frontend => https://github.com/AhmedBoumaizaa/projet2 
+backend => https://github.com/AhmedBoumaizaa/ProjectSpringBootWatches 
