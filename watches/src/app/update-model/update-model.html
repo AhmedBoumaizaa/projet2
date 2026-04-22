@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <div class="card shadow mb-4">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">{{ajout ? 'Ajouter' : 'Modifier'}} un Modèle</h4>
+    </div>
+
+    <div class="card-body">
+      <form>
+
+        <div class="mb-3 w-50" [hidden]="ajout">
+          <label class="form-label">ID Modèle</label>
+          <input readonly type="text" [(ngModel)]="modele.idMod" name="idMod" class="form-control" placeholder="Entrez l'ID du modèle">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Nom Modèle</label>
+          <input type="text" [(ngModel)]="modele.nomMod" name="nomMod" class="form-control" placeholder="Entrez un nom de Modèle" required>
+        </div>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-success px-4" [disabled]="!modele.nomMod" (click)="saveModele()">
+            {{ajout ? 'Ajouter' : 'Modifier'}}
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

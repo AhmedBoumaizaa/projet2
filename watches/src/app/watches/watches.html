@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr>
+          <th>Id</th>
+          <th>Nom</th>
+          <th>Modèle</th>
+          <th>Chiffre d'Affaires</th>
+          <th>Email</th>
+          <th>Date Création</th>
+          <th *ngIf="authService.isAdmin()">Actions</th> <!-- ✅ hide column header too -->
+        </tr>
+        <tbody *ngFor="let ent of watches">
+          <tr>
+            <td>{{ ent.idEnt }}</td>
+            <td>{{ ent.nomEnt }}</td>
+            <td>{{ ent.modele?.nomMod || 'PAS DE MODELE' }}</td>
+            <td>{{ ent.chiffreAff | number }}</td>
+            <td>{{ ent.email }}</td>
+            <td>{{ ent.dateCre | date:'dd/MM/yyyy' }}</td>
+            <td *ngIf="authService.isAdmin()"> 
+              <button class="btn btn-danger btn-sm me-3" (click)="supprimerWatch(ent)">Supprimer</button>
+              <a class="btn btn-success btn-sm" [routerLink]="['/updateWatch', ent.idEnt]">Modifier</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

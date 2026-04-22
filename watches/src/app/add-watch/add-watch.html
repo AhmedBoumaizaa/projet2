@@ -1,0 +1,98 @@
+<div class="container">
+  <div>
+    <h2>Ajouter une Montre :</h2>
+  </div>
+
+<form #addForm="ngForm">
+
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <label>Nom Montre</label>
+    <input type="text"
+           [(ngModel)]="newWatch.nomEnt"
+           name="nomEnt"
+           class="form-control"
+           required minlength="3"
+           #nomCtrl="ngModel">
+
+    <div class="text-danger" *ngIf="nomCtrl.invalid && nomCtrl.touched">
+      Le nom doit comporter au moins 3 caractères.
+    </div>
+  </div>
+
+
+  <div class="col-sm-2 col-md-2 col-lg-2">
+    <label>Chiffre d'Affaires</label>
+    <input type="number"
+           [(ngModel)]="newWatch.chiffreAff"
+           name="chiffreAff"
+           class="form-control"
+           required min="1"
+           #caCtrl="ngModel">
+
+    <div class="text-danger" *ngIf="caCtrl.invalid && caCtrl.touched">
+      Le chiffre d’affaires doit être supérieur à 0.
+    </div>
+  </div>
+
+
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <label>Date Création</label>
+    <input type="date"
+           [(ngModel)]="newWatch.dateCre"
+           name="dateCreation"
+           class="form-control"
+           required
+           #dateCtrl="ngModel">
+
+    <div class="text-danger" *ngIf="dateCtrl.invalid && dateCtrl.touched">
+      La date est obligatoire.
+    </div>
+  </div>
+
+
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <label>Email</label>
+    <input type="email"
+           [(ngModel)]="newWatch.email"
+           name="email"
+           class="form-control"
+           required
+           pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+           #emailCtrl="ngModel">
+
+    <div class="text-danger" *ngIf="emailCtrl.invalid && emailCtrl.touched">
+      Email non valide.
+    </div>
+  </div>
+
+
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <label>Modèle</label>
+    <select class="form-control form-control-lg"
+            [(ngModel)]="newIdMod"
+            name="idMod"
+            required
+            #modCtrl="ngModel">
+
+      <option value="">-- Choisir un modèle --</option>
+      <option *ngFor="let mod of modeles" [value]="mod.idMod">
+        {{ mod.nomMod }}
+      </option>
+    </select>
+
+    <div class="text-danger" *ngIf="modCtrl.invalid && modCtrl.touched">
+      Veuillez choisir un modèle.
+    </div>
+  </div>
+
+
+  <div class="mt-2">
+    <button type="button"
+            class="btn btn-success"
+            (click)="addWatch()"
+            [disabled]="addForm.invalid">
+      Ajouter
+    </button>
+    </div>
+
+</form>

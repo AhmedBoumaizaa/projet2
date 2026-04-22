@@ -1,0 +1,28 @@
+<div class="container">
+<app-update-secteur [secteur]="updatedSec"
+                    (secteurUpdated)="secteurUpdated($event)"
+                    [ajout]="ajout">
+</app-update-secteur>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id Secteur</th>
+            <th>Nom Secteur</th>
+          </tr>
+        </thead>
+
+        @for(sec of secteurs; track sec.idSec) {
+        <tbody>
+          <tr>
+            <td>{{sec.idSec}}</td>
+            <td>{{sec.nomSec}}</td>
+            <td><a class="btn btn-success" (click)="updateSec(sec)">Editer</a></td>
+          </tr>
+        </tbody>
+        }
+      </table>
+    </div>
+  </div>
+</div> 

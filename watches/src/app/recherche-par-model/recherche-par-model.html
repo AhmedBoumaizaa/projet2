@@ -1,0 +1,61 @@
+<h1 style="text-align: center;">Recherche de montres par modèle</h1>
+
+<div class="container">
+
+  <div class="form-group mt-3 mb-3">
+    <label>Sélectionnez un modèle :</label>
+    <select id="idMod" name="idMod" class="form-control" [(ngModel)]="idMod" (change)="onChange()">
+      <option value="">-- Choisissez un modèle --</option>
+      @for (m of modeles; track m.idMod) {
+        <option [value]="m.idMod">{{ m.nomMod }}</option>
+      }
+    </select>
+  </div>
+
+
+  <div *ngIf="idMod && watches.length > 0; else aucunResultat">
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Modèle</th>
+          <th>Chiffre d'Affaires (M$)</th>
+          <th>Date de Création</th>
+          <th>Email</th>
+          @if(authService.isAdmin()) {
+          <th>Actions</th>
+          }
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (e of watches; track e.idEnt) {
+        <tr>
+          <td>{{ e.idEnt}}</td>
+          <td>{{ e.nomEnt }}</td>
+          <td>{{ e.modele?.nomMod }}</td>
+          <td>{{ e.chiffreAff }}</td>
+          <td>{{ e.dateCre | date:'yyyy-MM-dd' }}</td>
+          <td>{{ e.email }}</td>
+          @if(authService.isAdmin()) {
+          <td>
+            <button class="btn btn-success btn-sm me-2" (click)="modifierWatch(e)">
+              Modifier
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="supprimerWatch(e)">
+              Supprimer
+            </button>
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+
+  <ng-template #aucunResultat>
+    <p *ngIf="idMod">Aucune montre trouvée pour ce modèle.</p>
+  </ng-template>
+</div>
